@@ -1,5 +1,11 @@
 <HTML>
     <HEAD>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style>
+            html, body, #yamap {
+                width: 100%; height: 100%; padding: 0; margin: 0;
+            }
+        </style>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&coordorder=longlat" type="text/javascript"></script>
         <script type="text/javascript">
@@ -17,9 +23,12 @@
 
                 map = new ymaps.Map('yamap', {
                     center: center,
-                    zoom: zoom,
-                    controls: []
+                    zoom: zoom
+                    // ,controls: []
+                }, {
+                    searchControlProvider: 'yandex#search'
                 });
+
                 // 1. Запрашиваем через геокодер район (у Яндекса этой возможности пока нет, придется пользоваться OSM)
                 var url = "http://nominatim.openstreetmap.org/search";
                 $.getJSON(url, {q: regionName1, format: "json", polygon_geojson: 1})
@@ -114,7 +123,7 @@
     </HEAD>
     <BODY>
         <!-- <div id="yamap" style="width: 611px; height: 400px; outline: 2px solid #C0BFBF;"></div> -->
-        <div id="yamap" style="width: 100%; height: 100%; outline: 2px solid #C0BFBF;"></div>
+        <div id="yamap"></div>
         <!-- <div id="yamap" style="width: 1000px; height: 600px; outline: 2px solid #C0BFBF;"></div> -->
     </BODY>
 </HTML>
